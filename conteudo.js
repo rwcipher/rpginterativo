@@ -29,7 +29,7 @@ const BADGES = {msgs:17, calls:4, gallery:0, notes:0, recs:0, web:0};
 //      para mostrar só a descrição num fundo colorido (tone).
 // cap: legenda escrita pelo Igor. fav: true = coração de favorita.
 const PHOTOS = [
- {id:"janela", img:"img/janela.jpg", title:"Última foto", date:"Hoje, 23:41", cap:"", fav:false,
+ {id:"janela", img:"img/Gabrielle bebendo.jpg", title:"Última foto", date:"Hoje, 23:41", cap:"", fav:false,
   desc:"Tirada de fora da janela da taverna. Lá dentro, agentes de preto conversam perto do balcão. O próprio Igor aparece desfocado no canto, espiando.",
   prompt:"(já é a imagem real montada a partir do mapa)"},
  {id:"gabi", title:"lado esquerdo", date:"Há 4 dias", cap:"lado esquerdo", fav:true, tone:"#3a3a4a,#15151c",
