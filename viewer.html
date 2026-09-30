@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Interação</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  body{display:flex;flex-direction:column;overflow:hidden}
+  header{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 16px;border-bottom:1px solid var(--line);flex-shrink:0}
+  header h1{flex:1;font-size:15px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  header .ao-vivo{font-size:11px;font-weight:700;color:#1b1530;background:var(--accent);border-radius:999px;padding:3px 9px;white-space:nowrap}
+  header button{padding:6px 12px}
+  iframe{flex:1;width:100%;border:0;background:#000}
+</style></head>
+<body>
+<header><h1 id="t"></h1><span class="ao-vivo" id="tag" hidden></span><button id="fechar" aria-label="Fechar">✕ Fechar</button></header>
+<iframe id="f" title="Conteúdo" allow="autoplay"></iframe>
+<script type="module">
+import OBR from "./vendor/obr-sdk.js";
+import { MODAL_VIEWER, MODAL_ESPELHO, CANAL_ESP } from "./comum.js";
+
+const q = new URLSearchParams(location.search);
+const modo = q.get("modo") || "normal";           // "normal" = quem usa | "espelho" = quem assiste
+const sessao = q.get("sessao");                   // liga quem usa a quem assiste
+const espelhar = q.get("espelhar") || "nao";
+const dono = q.get("dono") || "";
+const frame = document.getElementById("f");
+const tag = document.getElementById("tag");
+document.getElementById("t").textContent = q.get("titulo") || "";
+
+let src = q.get("src") || "about:blank";
+if (modo === "espelho") src += (src.includes("?") ? "&" : "?") + "espelho=1";
+frame.src = src;
+
+OBR.onReady(() => {
+  const enviar = (dados) => OBR.broadcast.sendMessage(CANAL_ESP, { sessao, ...dados }, { destination: "REMOTE" }).catch(() => {});
+
+  // ----- QUEM USA: manda cada mudança de tela para a sala -----
+  if (modo === "normal" && sessao && espelhar !== "nao") {
+    let ultimo = null;
+    tag.hidden = false; tag.textContent = espelhar === "todos" ? "● ao vivo p/ sala" : "● ao vivo p/ mestre";
+    enviar({ tipo: "abrir", para: espelhar, src: q.get("src"), titulo: q.get("titulo"), dono });
+    window.addEventListener("message", (e) => {
+      if (e.source !== frame.contentWindow || e.data?.tipo !== "rpg-estado") return;
+      ultimo = e.data.estado;
+      enviar({ tipo: "estado", estado: ultimo });
+    });
+    OBR.broadcast.onMessage(CANAL_ESP, ({ data }) => {
+      if (data?.sessao === sessao && data.tipo === "pedir" && ultimo) enviar({ tipo: "estado", estado: ultimo });
+    });
+    const encerrar = () => enviar({ tipo: "fechar" });
+    window.addEventListener("pagehide", encerrar);
+    document.getElementById("fechar").onclick = async () => { await encerrar(); OBR.modal.close(MODAL_VIEWER); };
+  }
+
+  // ----- QUEM ASSISTE: reproduz a tela, sem poder mexer -----
+  else if (modo === "espelho") {
+    tag.hidden = false; tag.textContent = `👁 ${dono || "player"} usando`;
+    OBR.broadcast.onMessage(CANAL_ESP, ({ data }) => {
+      if (data?.sessao !== sessao) return;
+      if (data.tipo === "estado") frame.contentWindow?.postMessage({ tipo: "rpg-aplicar", estado: data.estado }, "*");
+      if (data.tipo === "fechar") OBR.modal.close(MODAL_ESPELHO);
+    });
+    frame.addEventListener("load", () => enviar({ tipo: "pedir" }));
+    document.getElementById("fechar").onclick = () => OBR.modal.close(MODAL_ESPELHO);
+  }
+
+  // ----- Mestre abrindo direto, ou sem espelho -----
+  else {
+    document.getElementById("fechar").onclick = () => OBR.modal.close(MODAL_VIEWER);
+  }
+
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") document.getElementById("fechar").click(); });
+});
+</script>
+</body></html>

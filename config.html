@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Configurar interação</title>
+<link rel="stylesheet" href="estilo.css"></head>
+<body><div class="wrap">
+  <h1>Objeto interativo</h1>
+  <div class="sub" id="itemNome">carregando…</div>
+
+  <label for="titulo">Título</label>
+  <input type="text" id="titulo" placeholder="Celular do Igor">
+
+  <label for="conteudo">O que abre</label>
+  <select id="conteudo"></select>
+  <input type="text" id="outro" placeholder="https://..." style="margin-top:6px;display:none">
+  <div class="hint">A lista vem do arquivo <b>conteudos.json</b> no GitHub.</div>
+
+  <label for="narracao">Aviso para a sala</label>
+  <textarea id="narracao" placeholder="{player} pegou o celular do Igor."></textarea>
+  <div class="hint"><b>{player}</b> vira o nome de quem interagiu.</div>
+  <label class="check"><input type="checkbox" id="falar"> Falar o aviso em voz alta (se o navegador permitir)</label>
+
+  <label for="espelhar">Enquanto o player usa, quem vê a tela dele ao vivo?</label>
+  <select id="espelhar">
+    <option value="nao">Ninguém (só ele vê)</option>
+    <option value="mestre">Só o mestre</option>
+    <option value="todos">Todos da sala</option>
+  </select>
+  <div class="hint">Quem assiste vê cada toque, mas não consegue mexer.</div>
+
+  <label for="raio">Distância máxima (em quadrados)</label>
+  <input type="number" id="raio" min="0" step="0.5" value="0">
+  <div class="hint">0 = sem limite. Com limite, escolha abaixo o token de cada player.</div>
+
+  <label>Quem pode interagir</label>
+  <div class="players" id="players"></div>
+
+  <div class="acoes">
+    <button class="prim" id="salvar">Salvar</button>
+    <button id="testar">Testar</button>
+    <button id="cancelar">Cancelar</button>
+    <button class="perigo" id="remover">Remover interação</button>
+  </div>
+</div>
+<script type="module">
+import OBR from "./vendor/obr-sdk.js";
+import { DATA, MODAL_CONFIG, abrirViewer, url } from "./comum.js";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const itemId = new URLSearchParams(location.search).get("item");
+
+OBR.onReady(async () => {
+  const [item] = await OBR.scene.items.getItems([itemId]);
+  if (!item) { $("itemNome").textContent = "Token não encontrado."; return; }
+  $("itemNome").textContent = `Token: ${item.name || "(sem nome)"}`;
+
+  const d = item.metadata[DATA] || { titulo: item.name || "", conteudo: "", narracao: "{player} está usando: " + (item.name || "objeto") + ".", raio: 0, falar: false, espelhar: "todos", liberados: {} };
+  $("titulo").value = d.titulo || "";
+  $("narracao").value = d.narracao || "";
+  $("raio").value = d.raio || 0;
+  $("falar").checked = !!d.falar;
+  $("espelhar").value = d.espelhar || "todos";
+
+  // Conteúdos disponíveis no PC
+  let lista = [];
+  try { lista = (await (await fetch(url("conteudos.json"), { cache: "no-store" })).json()).map(c => ({ ...c, url: url(c.url) })); } catch (e) {}
+  const sel = $("conteudo");
+  sel.innerHTML = lista.map(c => `<option value="${esc(c.url)}">${esc(c.nome || c.id)}</option>`).join("") + `<option value="__outro">Outro link…</option>`;
+  if (d.conteudo && lista.some(c => c.url === d.conteudo)) sel.value = d.conteudo;
+  else if (d.conteudo) { sel.value = "__outro"; $("outro").value = d.conteudo; }
+  const toggleOutro = () => $("outro").style.display = sel.value === "__outro" ? "block" : "none";
+  sel.addEventListener("change", toggleOutro); toggleOutro();
+
+  // Players (online + os já liberados que estão offline) e tokens de personagem
+  const online = (await OBR.party.getPlayers()).filter(p => p.role === "PLAYER");
+  const tokens = await OBR.scene.items.getItems(i => i.layer === "CHARACTER");
+  const liberados = d.liberados || {};
+  const todos = new Map(online.map(p => [p.id, { id: p.id, nome: p.name, online: true }]));
+  for (const [id, l] of Object.entries(liberados)) if (!todos.has(id)) todos.set(id, { id, nome: l.nome, online: false });
+
+  const box = $("players");
+  if (!todos.size) box.innerHTML = `<div class="vazio">Nenhum player na sala agora. Quando entrarem, abra esta janela de novo.</div>`;
+  else box.innerHTML = [...todos.values()].map(p => {
+    const l = liberados[p.id];
+    const opts = `<option value="">— token —</option>` + tokens.map(t =>
+      `<option value="${t.id}" ${l?.token === t.id ? "selected" : ""}>${esc(t.name || "sem nome")}</option>`).join("");
+    return `<div class="prow" data-id="${esc(p.id)}" data-nome="${esc(p.nome)}">
+      <input type="checkbox" ${l ? "checked" : ""} aria-label="Liberar ${esc(p.nome)}">
+      <span class="nome">${esc(p.nome)} ${p.online ? "" : '<span class="off">(offline)</span>'}</span>
+      <select aria-label="Token de ${esc(p.nome)}">${opts}</select></div>`;
+  }).join("");
+
+  function ler() {
+    const lib = {};
+    box.querySelectorAll(".prow").forEach(r => {
+      if (r.querySelector("input").checked) lib[r.dataset.id] = { nome: r.dataset.nome, token: r.querySelector("select").value || null };
+    });
+    return {
+      titulo: $("titulo").value.trim(),
+      conteudo: sel.value === "__outro" ? $("outro").value.trim() : sel.value,
+      narracao: $("narracao").value.trim(),
+      raio: Math.max(0, Number($("raio").value) || 0),
+      falar: $("falar").checked,
+      espelhar: $("espelhar").value,
+      liberados: lib,
+    };
+  }
+
+  $("salvar").onclick = async () => {
+    const novo = ler();
+    if (!novo.conteudo) return OBR.notification.show("Escolha o que o objeto abre.", "WARNING");
+    await OBR.scene.items.updateItems([itemId], its => { for (const it of its) it.metadata[DATA] = novo; });
+    OBR.notification.show("Interação salva.", "SUCCESS");
+    OBR.modal.close(MODAL_CONFIG);
+  };
+  $("testar").onclick = () => { const n = ler(); if (n.conteudo) abrirViewer(OBR, n); };
+  $("cancelar").onclick = () => OBR.modal.close(MODAL_CONFIG);
+  $("remover").onclick = async () => {
+    await OBR.scene.items.updateItems([itemId], its => { for (const it of its) delete it.metadata[DATA]; });
+    OBR.notification.show("Interação removida.", "INFO");
+    OBR.modal.close(MODAL_CONFIG);
+  };
+});
+</script>
+</body></html>

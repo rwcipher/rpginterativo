@@ -1,0 +1,9 @@
+{
+  "name": "RPG Interativo",
+  "version": "0.2.0",
+  "manifest_version": 1,
+  "author": "rwcipher",
+  "description": "Objetos interativos no mapa: o mestre libera, o player interage e a sala assiste ao vivo.",
+  "icon": "https://rwcipher.com.br/rpginterativo/icons/interagir.svg",
+  "background_url": "https://rwcipher.com.br/rpginterativo/background.html"
+}
