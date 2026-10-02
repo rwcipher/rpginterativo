@@ -165,6 +165,8 @@ button:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-ra
 .site dd{margin:0;font-weight:600}
 .site .warn{font-family:var(--ui);font-size:13px;background:#efe0c8;border-left:3px solid #a3762c;padding:10px 12px}
 .site .price{font-size:32px;font-weight:600;margin:6px 0 12px}
+.site p{font-size:18px;line-height:1.5;margin:0 0 12px}
+.site.dark{background:#15171b;color:#e6e2da}.site.dark .brand{border-color:#3a3f47}.site.dark .lot,.site.dark dt{color:#9a958c}.site.dark .warn{background:#2a2418;color:#e6dcc4}
 
 /* tools (mestre) */
 .tools{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--page-soft)}
@@ -227,6 +229,13 @@ const store = {
 const GAL = (typeof FOTOS !== 'undefined') ? FOTOS : (typeof PHOTOS !== 'undefined' ? PHOTOS : []);
 const imgFor = p => store.get(p.id) || p.img || null;
 const isVid = p => !!p.video;
+const SITES_ = (typeof SITES !== 'undefined') ? SITES : [
+ {titulo:"Moretti Leilões — Lote 117", url:"morettileiloes.com.br/lote/117", hora:"Hoje, 21:10",
+  marca:"Moretti Leilões & Antiguidades", subtitulo:"Lote 117 · Acervo de família",
+  manchete:"Armadura europeia de placas com espada cerimonial", imgTexto:"foto do conjunto sobre um suporte de madeira",
+  campos:[["Procedência","Família Baroni"],["Estado","Incompleto: falta a braçadeira esquerda"],["Espada","“Escalibur”, gravação no punho"],["Encerra em","2 dias"]],
+  destaqueRotulo:"Lance inicial", destaque:"R$ 480.000",
+  aviso:"Nota do leiloeiro: o arrematante já manifestou interesse e aguarda a peça faltante. Tratar diretamente com o Sr. Moretti."}];
 
 const ICONS = {
  back:'<svg width="12" height="20" viewBox="0 0 12 20"><path d="M10 2 2 10l8 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -314,14 +323,22 @@ const R = {
   return `<div class="view appv fade">${bar('Recentes','','home')}<div class="body list">${CALLS.map(c=>`<button disabled style="cursor:default"><span class="avatar" style="background:#2a2520">${ICONS.tel}</span><span class="row-main"><b class="${c.miss?'miss':''}">${esc(c.n)}<small>${esc(c.t)}</small></b><span>${esc(c.k)}</span></span></button>`).join('')}</div></div>`;
  },
  web(){
-  return `<div class="view appv fade">${bar('','','home',`<div class="url">morettileiloes.com.br/lote/117</div>`)}<div class="body"><div class="site">
-   <div class="brand">Moretti Leilões &amp; Antiguidades</div>
-   <div class="lot">Lote 117 · Acervo de família</div>
-   <h2>Armadura europeia de placas com espada cerimonial</h2>
-   <div class="img">foto do conjunto sobre um suporte de madeira</div>
-   <dl><dt>Procedência</dt><dd>Família Baroni</dd><dt>Estado</dt><dd>Incompleto: falta a braçadeira esquerda</dd><dt>Espada</dt><dd>“Escalibur”, gravação no punho</dd><dt>Encerra em</dt><dd>2 dias</dd></dl>
-   <div class="lot">Lance inicial</div><div class="price">R$ 480.000</div>
-   <div class="warn">Nota do leiloeiro: o arrematante já manifestou interesse e aguarda a peça faltante. Tratar diretamente com o Sr. Moretti.</div>
+  return `<div class="view appv fade">${bar('Navegador','Páginas salvas','home')}<div class="body list">${SITES_.map((x,i)=>`<button data-a="site" data-i="${i}"><span class="avatar" style="background:#2a2f36;font-size:15px">${esc((x.marca||x.titulo||'?').trim()[0]||'?')}</span><span class="row-main"><b>${esc(x.titulo||x.manchete||'Página')}<small>${esc(x.hora||'')}</small></b><span>${esc(x.url||'')}</span></span></button>`).join('') || '<div style="padding:20px;color:var(--ash)">Nenhuma página salva.</div>'}</div></div>`;
+ },
+ site(){
+  const x=SITES_[state.i]||{};
+  const escuro = x.tema==='escuro';
+  const campos = (x.campos||[]).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
+  const img = x.img ? `<div class="img" style="background:url('${esc(x.img)}') center/cover"></div>` : (x.imgTexto ? `<div class="img">${esc(x.imgTexto)}</div>` : '');
+  return `<div class="view appv fade">${bar('','','web',`<div class="url">${esc(x.url||'')}</div>`)}<div class="body"><div class="site ${escuro?'dark':''}">
+   ${x.marca?`<div class="brand">${esc(x.marca)}</div>`:''}
+   ${x.subtitulo?`<div class="lot">${esc(x.subtitulo)}</div>`:''}
+   ${x.manchete?`<h2>${esc(x.manchete)}</h2>`:''}
+   ${img}
+   ${(x.texto||[]).map(t=>`<p>${esc(t)}</p>`).join('')}
+   ${campos?`<dl>${campos}</dl>`:''}
+   ${x.destaque?`<div class="lot">${esc(x.destaqueRotulo||'')}</div><div class="price">${esc(x.destaque)}</div>`:''}
+   ${x.aviso?`<div class="warn">${esc(x.aviso)}</div>`:''}
   </div></div></div>`;
  },
 };
@@ -428,6 +445,7 @@ screen.addEventListener('click',e=>{
   if(a==='photo') return go('photo',{i});
   if(a==='thread'){ THREADS[i].unread=false; return go('thread',{i}); }
   if(a==='note') return go('note',{i});
+  if(a==='site') return go('site',{i});
   if(a==='play'){ if(recTimer && b.firstElementChild.textContent==='■'){ stopRec(); b.firstElementChild.textContent='▶'; return; } return play(i); }
   if(a==='upload'){ uploadId=b.dataset.id; return fileIn.click(); }
   if(a==='rmimg'){ try{localStorage.removeItem('igor-img-'+b.dataset.id);}catch(e){} return go(state.v,state); }
