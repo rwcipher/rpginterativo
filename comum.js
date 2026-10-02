@@ -9,11 +9,17 @@ export const MODAL_CONFIG = `${ID}/config`;
 export const MODAL_VIEWER = `${ID}/viewer`;
 export const MODAL_ESPELHO = `${ID}/espelho`;
 export const CANAL_ESP = `${ID}/espelho`;   // estado da tela de quem está usando
+export const CANAL_LOCAL = `${ID}/local`;  // recados entre as janelas da própria pessoa
 
 export function abrirViewer(OBR, dados, opts = {}) {
   const q = new URLSearchParams({ src: dados.conteudo, titulo: dados.titulo || "" });
   if (opts.sessao) { q.set("sessao", opts.sessao); q.set("espelhar", opts.espelhar || "nao"); q.set("dono", opts.dono || ""); }
+  if (opts.itemId) q.set("item", opts.itemId);
   return OBR.modal.open({ id: MODAL_VIEWER, url: url(`viewer.html?${q}`), width: 360, height: 760 });
+}
+
+export function reabrirViewer(OBR, busca) {
+  return OBR.modal.open({ id: MODAL_VIEWER, url: url(`viewer.html${busca}`), width: 360, height: 760 });
 }
 
 export function abrirEspelho(OBR, msg) {
