@@ -79,6 +79,9 @@ button:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-ra
 
 /* home */
 .home{background:radial-gradient(140% 90% at 20% 0%,#3a2c20 0%,#15110e 60%,#000 100%)}
+.homewall{position:absolute;inset:-12px;background-size:cover;background-position:62% 30%;filter:brightness(.5) blur(2px)}
+.home .grid{position:relative;z-index:1}
+.home .app{text-shadow:0 1px 4px rgba(0,0,0,.9)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 10px;padding:92px 22px 0}
 .app{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:500;position:relative}
 .app .icon{width:62px;height:62px;border-radius:16px;display:grid;place-items:center;box-shadow:0 6px 14px -8px rgba(0,0,0,.8)}
@@ -262,7 +265,8 @@ const R = {
  },
  home(){
   const apps=[['gallery','Galeria','gal','linear-gradient(145deg,#b0842f,#6d4a17)'],['msgs','Mensagens','msg','linear-gradient(145deg,#3a6ea5,#1f3f66)'],['notes','Notas','note','linear-gradient(145deg,#e9d9a6,#c4ad6c)'],['recs','Gravador','rec','linear-gradient(145deg,#8a2a24,#4a1411)'],['calls','Telefone','tel','linear-gradient(145deg,#2f7d4a,#1a4a2a)'],['web','Navegador','web','linear-gradient(145deg,#56606a,#2b3036)']].map(x=>[...x,BADGES[x[0]]||0]);
-  return `<div class="view home fade"><div class="grid">${apps.map(([id,n,ic,bg,b])=>`<button class="app" data-a="${id}"><span class="icon" style="background:${bg}">${ICONS[ic]}</span>${n}${b?`<span class="badge">${b}</span>`:''}</button>`).join('')}</div></div>`;
+  const hw = store.get('wall') || WALL;
+  return `<div class="view home fade">${hw?`<div class="homewall" style="background-image:url('${hw}')"></div>`:''}<div class="grid">${apps.map(([id,n,ic,bg,b])=>`<button class="app" data-a="${id}"><span class="icon" style="background:${bg}">${ICONS[ic]}</span>${n}${b?`<span class="badge">${b}</span>`:''}</button>`).join('')}</div></div>`;
  },
  gallery(){
   const nv=GAL.filter(isVid).length, nf=GAL.length-nv;
@@ -397,6 +401,17 @@ function aplicar(s){
     if(Math.abs(vd.currentTime-s.video.t)>0.7) vd.currentTime=s.video.t;
     s.video.tocando ? vd.play().catch(()=>{}) : vd.pause(); } }
 }
+// Reabrir onde parou (quem usa)
+function restaurar(s){
+  if(!s || !R[s.v] || s.v==='pin' || s.v==='lock') return;
+  go(s.v, s.i!=null ? {i:s.i} : {});
+  requestAnimationFrame(()=>{
+    if(s.scroll!=null){ const b=$v.querySelector('.body'); if(b) b.scrollTop = s.scroll*(b.scrollHeight-b.clientHeight); }
+    if(s.video){ const vd=$v.querySelector('.vplayer'); if(vd) vd.currentTime=s.video.t||0; }
+  });
+}
+if(!ESPELHO) window.addEventListener('message', e=>{ if(e.data && e.data.tipo==='rpg-restaurar') restaurar(e.data.estado); });
+
 if(ESPELHO){
   const bloq=document.createElement('div');
   bloq.style.cssText='position:absolute;inset:0;z-index:45;cursor:not-allowed';
