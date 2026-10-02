@@ -1,5 +1,5 @@
 import OBR from "./vendor/obr-sdk.js";
-import { url, ID, DATA, CANAL, CANAL_ESP, MODAL_CONFIG, MODAL_ESPELHO, abrirViewer, abrirEspelho, textoNarracao, novaSessao } from "./comum.js";
+import { url, ID, DATA, CANAL, CANAL_ESP, CANAL_LOCAL, MODAL_CONFIG, MODAL_ESPELHO, abrirViewer, reabrirViewer, abrirEspelho, textoNarracao, novaSessao } from "./comum.js";
 
 OBR.onReady(async () => {
   const meuId = await OBR.player.getId();
@@ -57,14 +57,32 @@ OBR.onReady(async () => {
     }
 
     const nome = await OBR.player.getName();
-    await abrirViewer(OBR, dados, { sessao: novaSessao(), espelhar: dados.espelhar || "nao", dono: nome });
+    await abrirViewer(OBR, dados, { sessao: novaSessao(), espelhar: dados.espelhar || "nao", dono: nome, itemId: item.id });
     OBR.broadcast.sendMessage(CANAL, { texto: textoNarracao(dados, nome), falar: !!dados.falar }, { destination: "ALL" });
   }
 
-  // ---------- ESPELHO: abrir/fechar a tela de quem está usando ----------
+  // ---------- ESPELHO: quem assiste ----------
+  const sessoes = new Map();   // sessões ativas: sessao -> dados para (re)abrir o espelho
   OBR.broadcast.onMessage(CANAL_ESP, ({ data }) => {
-    if (data?.tipo !== "abrir") return;
-    if (data.para === "todos" || (data.para === "mestre" && meuPapel === "GM")) abrirEspelho(OBR, data);
+    if (!data?.sessao) return;
+    if (data.tipo === "abrir") {
+      if (!(data.para === "todos" || (data.para === "mestre" && meuPapel === "GM"))) return;
+      const jaAberta = sessoes.has(data.sessao);
+      sessoes.set(data.sessao, data);
+      if (!jaAberta) abrirEspelho(OBR, data);
+    }
+    if (data.tipo === "fechar" || data.tipo === "forcar-fechar") sessoes.delete(data.sessao);
+  });
+
+  // ---------- Janela fechou sem querer (clique fora): reabre onde estava ----------
+  OBR.broadcast.onMessage(CANAL_LOCAL, ({ data }) => {
+    if (data?.tipo === "reabrir-espelho" && sessoes.has(data.sessao)) {
+      setTimeout(() => sessoes.has(data.sessao) && abrirEspelho(OBR, sessoes.get(data.sessao)), 350);
+    }
+    if (data?.tipo === "reabrir-usuario" && data.busca) {
+      setTimeout(() => reabrirViewer(OBR, data.busca), 350);
+    }
+    if (data?.tipo === "parar-espelho") sessoes.delete(data.sessao);   // mestre fechou só pra ele
   });
 
   // ---------- TODOS: aviso (e voz, se ligada) quando alguém interage ----------
@@ -79,3 +97,4 @@ OBR.onReady(async () => {
     }
   });
 });
+
