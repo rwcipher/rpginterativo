@@ -105,7 +105,7 @@ const NOTES = [
   "Nessa missão, na floresta sombria.",
   "Espero que seja você, Gabi.",
   "A espada se chama Escalibur. Meu avô deu esse nome rindo, dizendo que toda família precisa de um pouco de lenda. O braço da armadura era dele também.",
-  "A cicatriz é do dia em que a casa do vô pegou fogo. Eu entrei. Cheguei até a porta do quarto dele. Não deu. Quando me tiraram de lá, a única coisa que eu segurava era o braço da armadura, que tava pendurado no corredor.",
+  "A cicatriz é do dia em que a casa do vô pegou fogo. Eu entrei. Cheguei até a porta do quarto dele. Não deu. Quando me tiraram de lá, só lembro no hospital.",
   "Então ela não esconde só a queimadura. Esconde que eu falhei com ele. E ela fica do lado do coração. Todo dia que eu usava, era uma promessa: da próxima vez, eu não vou soltar ninguém.",
   "Minha família vai querer isso de volta. Não por amor, por dinheiro. Não entrega. Nem se oferecerem tudo. Principalmente se oferecerem tudo.",
   "O nome Baroni não é a fortuna. Nunca foi. É isso aqui.",
@@ -114,15 +114,15 @@ const NOTES = [
   "— Igor Baroni",
   "PS.: Depois vou excluir isso KKKKK. Acho que é só uma deprê momentânea, deve ser esse lugar."]},
 
+   {id:"lembrete", title:"lembrete", date:"Anos atrás", body:[
+  "Me perguntam por que só o braço esquerdo.",
+  "O lado esquerdo é o lado do coração.",
+  "E é com ele que eu protejo quem eu amo."]},
+
  {id:"registro", title:"registro", date:"Meses atrás, 02:40", body:[
   "Acho que essa missão vai ser longa, mas quero deixar registrado.",
   "Tomara que todos sobrevivam. Principalmente a Gabrielle. Não vou suportar sem conhecer ela mais, já que ela é a nossa capitã. (obs.: não posso dizer isso)",
-  "E a Ordem... e o que está por vir."]},
-
- {id:"floresta", title:"Floresta misteriosa", date:"Meses atrás, 03:10", body:[
-  "Acho que essa missão vai ser longa, mas quero deixar registrado.",
-  "E a Ordem... o que está por vir.",
-  "— Igor Baroni"]},
+  "E a Ordo Realitas... e o que está por vir."]},
 
  {id:"lista", title:"coisas", date:"Anos atrás", body:[
   "– café do vô (o da lata azul)",
