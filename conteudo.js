@@ -29,7 +29,12 @@ const BADGES = {msgs:17, calls:4, gallery:0, notes:0, recs:0, web:0};
 //      para mostrar só a descrição num fundo colorido (tone).
 // cap: legenda escrita pelo Igor. fav: true = coração de favorita.
 const FOTOS = [
- // ===== FOTOS E VÍDEO DE TESTE (cole no começo da lista FOTOS) =====
+ {id:"armadura-pai", img:"img/armadura-incompleta.jpg", title:"Recebida de Pai", date:"Há 2 semanas", cap:"", fav:false,
+  desc:"Foto enviada pelo pai no grupo da família: a armadura no salão da mansão, sem o braço esquerdo e sem a espada."},
+
+ {id:"familia", img:"img/familia-baroni.jpg", title:"Família Baroni", date:"Anos atrás", cap:"Foto tirada da Família Baroni", fav:false,
+  desc:"Retrato formal no escritório da mansão: o pai sentado, a mãe ao lado, Bianca atrás, o irmão mais velho à esquerda e Igor à direita, de terno, sem sorrir."},
+
  {id:"koda", video:"img/koda.mp4", img:"img/koda-capa.jpg", title:"Koda", date:"Hoje, 20:12", dur:"0:10", cap:"", fav:false,
   desc:"Vídeo curto: uma garota de capuz diante de várias telas, com código refletido nos olhos."},
 
@@ -87,16 +92,21 @@ const THREADS = [
   ]},
  {id:"familia", name:"Família Baroni", color:"#4a3a2a", initial:"FB", time:"22:14", unread:true, muted:true, sub:"Pai, Mãe, Bianca",
   msgs:[
-   {stamp:"Ontem"},
-   {f:"Pai", t:"Igor, cadê a espada e o braço da armadura? O comprador quer o conjunto COMPLETO."},
+   {stamp:"Há 2 semanas, 07:12"},
+   {f:"Pai", img:"img/armadura-incompleta.jpg", t:"Olha o que você fez. Faltando o braço e a espada."},
+   {f:"Pai", t:"Devolve o que você roubou. Se não devolver, pode ficar escondido onde estiver, seu ingrato."},
    {f:"Mãe", t:"Filho, isso é roubo. Aquilo é patrimônio da família."},
    {f:"Bianca", t:"ele sempre foi assim, se acha o herdeiro do vovô 🙄"},
    {f:"Pai", t:"Você tem até sexta."},
    {stamp:"Hoje, 19:40"},
    {f:"Mãe", t:"Seu pai está muito nervoso. Responde, por favor."},
-   {f:"Bianca", t:"manda foto da espada pelo menos, pra gente saber que não quebrou kkk"},
    {f:"Pai", t:"O pessoal do leilão ligou de novo. Eles sabem que está com você."},
    {f:"Pai", t:"Última chance, Igor."},
+   {stamp:"Hoje, 22:14"},
+   {f:"Bianca", t:"vendemos 😘 e por um preço ótimo, mesmo sem as suas partes"},
+   {f:"Bianca", t:"pode ficar com essa velharia sem valor"},
+   {f:"Mãe", t:"A partir de hoje eu não te considero mais meu filho. Igual ao seu irmão. Dois ingratos."},
+   {f:"Bianca", t:"tchau, herdeiro do vovô 👋"},
   ]},
  {id:"gabi", name:"Gabi", color:"#2f3c52", initial:"G", time:"19:36", sub:"",
   msgs:[
@@ -142,12 +152,20 @@ const NOTES = [
   "Se eu morri te protegendo, então acho que dessa vez eu consegui.",
   "Agora é seu.",
   "— Igor"]},
+ {id:"registro", title:"registro", date:"Ontem, 02:40", body:[
+  "Acho que essa missão vai ser longa, mas quero deixar registrado.",
+  "Tomara que todos sobrevivam. Principalmente a Gabrielle. Não vou suportar sem conhecer ela mais, já que ela é a nossa capitã. (obs.: não posso dizer isso)",
+  "E a Ordem... e o que está por vir."]},
  {id:"lista", title:"coisas", date:"Semanas atrás", body:[
   "– café do vô (o da lata azul)",
   "– levar a espada pra afiar? NÃO. ninguém encosta nela",
   "– descobrir o que ele queria me mostrar na espada",
   "– não responder o pai",
   "– comprar faixa nova pro braço"]},
+ {id:"lembrete", title:"lembrete", date:"Meses atrás", body:[
+  "Encontrei um lugar no Brasil. Meio misterioso ainda, mas vou me acostumar.",
+  "Uma moça, Gabriella ou Gabrielle, tenho que perguntar ainda.",
+  "Ela é forte, inteligente. Gostei dela. Muito diferente da minha irmã."]},
 ];
 
 // ---------- GRAVADOR ----------
@@ -181,20 +199,21 @@ const CALLS = [
 // tema: "claro" ou "escuro". img: foto no topo (ex.: "img/casa.jpg").
 // texto: parágrafos. campos: ["Rótulo","Valor"]. destaque: número grande (preço etc.).
 const SITES = [
- {titulo:"Moretti Leilões — Lote 117", url:"morettileiloes.com.br/lote/117", hora:"Hoje, 21:10", tema:"claro",
-  marca:"Moretti Leilões & Antiguidades", subtitulo:"Lote 117 · Acervo de família",
-  manchete:"Armadura europeia de placas com espada cerimonial",
-  imgTexto:"foto do conjunto sobre um suporte de madeira",
-  campos:[["Procedência","Família Baroni"],["Estado","Incompleto: falta a braçadeira esquerda"],["Espada","“Escalibur”, gravação no punho"],["Encerra em","2 dias"]],
-  destaqueRotulo:"Lance inicial", destaque:"R$ 480.000",
-  aviso:"Nota do leiloeiro: o arrematante já manifestou interesse e aguarda a peça faltante. Tratar diretamente com o Sr. Moretti."},
+ {titulo:"Valenti Aste — Lotto 117", url:"valentiaste.it/pt/lotto/117", hora:"Hoje, 21:10", tema:"claro",
+  marca:"Casa d’Aste Valenti", subtitulo:"Firenze · São Paulo — Asta di famiglia · Lotto 117",
+  manchete:"Armatura italiana completa con spada cerimoniale",
+  img:"img/armadura-completa.jpg",
+  texto:["Armadura de placas em estilo milanês, preservada por gerações no salão da família. Acompanha a espada cerimonial com lâmina azul e guarda dourada."],
+  campos:[["Provenienza","Família Baroni — Toscana, Itália"],["Epoca","Estilo do séc. XVI"],["Spada","“Escalibur”, gravação no punho"],["Base d'asta","R$ 480.000"],["Stato","Venduto · sem a braçadeira esquerda e sem a espada"]],
+  destaqueRotulo:"Aggiudicato (arrematado)", destaque:"R$ 410.000",
+  aviso:"Nota del banditore: lote vendido incompleto. O arrematante aguarda a entrega das peças faltantes. Tratar diretamente com o Sr. Valenti."},
 
- {titulo:"Incêndio atinge casa no centro", url:"gazetaregional.com.br/cidade/incendio", hora:"Semanas atrás", tema:"escuro",
+ {titulo:"Mansão dos Baroni pega fogo", url:"gazetaregional.com.br/cidade/mansao-baroni", hora:"Semanas atrás", tema:"escuro",
   marca:"Gazeta Regional", subtitulo:"Cidade · atualizado às 07:40",
-  manchete:"Incêndio atinge casa durante a madrugada; morador idoso não resiste",
-  imgTexto:"fachada escurecida pela fumaça",
-  texto:["O fogo começou por volta das 3h e foi controlado pelos bombeiros após duas horas.",
-         "Um neto do morador entrou no imóvel tentando socorrê-lo e foi levado ao hospital com queimaduras.",
-         "A causa do incêndio ainda será apurada pela perícia."]},
+  manchete:"Mansão da família Baroni pega fogo misteriosamente durante a madrugada",
+  img:"img/mansao-incendio.jpg",
+  texto:["Um incêndio de grandes proporções destruiu a mansão da tradicional família Baroni. Equipes dos bombeiros trabalharam por mais de duas horas para controlar as chamas.",
+         "O morador mais velho da família, patriarca dos Baroni, morreu carbonizado dentro do imóvel.",
+         "O neto do morador, que entrou na casa tentando salvá-lo, ficou ferido por causa do fogo intenso e foi levado ao hospital com queimaduras.",
+         "A perícia não encontrou vestígios do autor nem a causa do incêndio. O caso segue sem explicação."]},
 ];
-
