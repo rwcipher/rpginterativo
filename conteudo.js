@@ -106,18 +106,13 @@ const NOTES = [
   "Espero que seja você, Gabi.",
   "A espada se chama Escalibur. Meu avô deu esse nome rindo, dizendo que toda família precisa de um pouco de lenda. O braço da armadura era dele também.",
   "A cicatriz é do dia em que a casa do vô pegou fogo. Eu entrei. Cheguei até a porta do quarto dele. Não deu. Quando me tiraram de lá, só lembro no hospital.",
-  "Então ela não esconde só a queimadura. Esconde que eu falhei com ele. E ela fica do lado do coração. Todo dia que eu usava, era uma promessa: da próxima vez, eu não vou soltar ninguém.",
+  "Então ela não esconde só a queimadura. Esconde que eu falhei com ele. E ela fica do lado do coração. E é com ele que eu protejo quem eu amo. Todo dia que eu usava, era uma promessa: da próxima vez, eu não vou soltar ninguém.",
   "Minha família vai querer isso de volta. Não por amor, por dinheiro. Não entrega. Nem se oferecerem tudo. Principalmente se oferecerem tudo.",
   "O nome Baroni não é a fortuna. Nunca foi. É isso aqui.",
   "Se eu morri protegendo as pessoas que considero minha família na Ordo Realitas, então acho que dessa vez eu consegui.",
   "Agora é seu.",
   "— Igor Baroni",
   "PS.: Depois vou excluir isso KKKKK. Acho que é só uma deprê momentânea, deve ser esse lugar."]},
-
-   {id:"lembrete", title:"lembrete", date:"Anos atrás", body:[
-  "Me perguntam por que só o braço esquerdo.",
-  "O lado esquerdo é o lado do coração.",
-  "E é com ele que eu protejo quem eu amo."]},
 
  {id:"registro", title:"registro", date:"Meses atrás, 02:40", body:[
   "Acho que essa missão vai ser longa, mas quero deixar registrado.",
