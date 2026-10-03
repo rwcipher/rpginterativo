@@ -109,7 +109,7 @@ const NOTES = [
   "Então ela não esconde só a queimadura. Esconde que eu falhei com ele. E ela fica do lado do coração. E é com ele que eu protejo quem eu amo. Todo dia que eu usava, era uma promessa: da próxima vez, eu não vou soltar ninguém.",
   "Minha família vai querer isso de volta. Não por amor, por dinheiro. Não entrega. Nem se oferecerem tudo. Principalmente se oferecerem tudo.",
   "O nome Baroni não é a fortuna. Nunca foi. É isso aqui.",
-  "Se eu morri protegendo as pessoas que considero minha família na Ordo Realitas, então acho que dessa vez eu consegui.",
+  "Se eu morri protegendo as pessoas que considero minha família na Spectro, então acho que dessa vez eu consegui.",
   "Agora é seu.",
   "— Igor Baroni",
   "PS.: Depois vou excluir isso KKKKK. Acho que é só uma deprê momentânea, deve ser esse lugar."]},
@@ -117,7 +117,7 @@ const NOTES = [
  {id:"registro", title:"registro", date:"Meses atrás, 02:40", body:[
   "Acho que essa missão vai ser longa, mas quero deixar registrado.",
   "Tomara que todos sobrevivam. Principalmente a Gabrielle. Não vou suportar sem conhecer ela mais, já que ela é a nossa capitã. (obs.: não posso dizer isso)",
-  "E a Ordo Realitas... e o que está por vir."]},
+  "E a Spectro... e o que está por vir."]},
 
  {id:"lista", title:"coisas", date:"Anos atrás", body:[
   "– café do vô (o da lata azul)",
