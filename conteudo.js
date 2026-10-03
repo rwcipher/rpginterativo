@@ -1,4 +1,4 @@
-/* =====================================================================
+s /* =====================================================================
    CELULAR DO IGOR — ARQUIVO DE CONTEÚDO
    Tudo que aparece no celular está aqui. Edite só entre as aspas "".
    Dicas:
@@ -37,13 +37,13 @@ const FOTOS = [
  {id:"familia", img:"img/familia-baroni.jpg", title:"Família Baroni", date:"Anos atrás", cap:"Foto tirada da Família Baroni", fav:false,
   desc:"Retrato formal no escritório da mansão: o pai sentado, a mãe ao lado, Bianca atrás, o irmão mais velho à esquerda e Igor à direita, de terno, sem sorrir."},
 
- {id:"bebendo", img:"img/gabrielle-bebendo.jpg", title:"Selfie na janela", date:"Hoje, 23:41", cap:"eles nem me viram", fav:false,
+ {id:"bebendo", img:"img/gabrielle-bebendo.jpg", title:"Selfie na janela", date:"Meses atrás, 23:41", cap:"eles nem me viram", fav:false,
   desc:"Igor tirando uma selfie do lado de fora da janela da taverna. Lá dentro, o grupo ri e bebe no balcão."},
 
- {id:"bebada", img:"img/gabrielle-bebada.jpg", title:"Discussão na taverna", date:"Hoje, 22:58", cap:"", fav:false,
+ {id:"bebada", img:"img/gabrielle-bebada.jpg", title:"Discussão na taverna", date:"Meses atrás, 22:58", cap:"", fav:false,
   desc:"Gabrielle, visivelmente alterada, apontando e reclamando, enquanto os outros tentam segurar a situação."},
 
- {id:"syx", img:"img/syx-bebado.jpg", title:"Syx no balcão", date:"Hoje, 22:30", cap:"quem deixou ele subir aí", fav:true,
+ {id:"syx", img:"img/syx-bebado.jpg", title:"Syx no balcão", date:"Meses atrás, 22:30", cap:"quem deixou ele subir aí", fav:true,
   desc:"Syx esparramado em cima do balcão, cercado de garrafas. Uma agente cobre o rosto de vergonha; a outra não para de rir."},
 
  {id:"vo-igor", img:"img/vo-e-igor.jpg", title:"Eu e o vô", date:"Ano passado", cap:"", fav:true,
