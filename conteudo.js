@@ -127,8 +127,8 @@ const NOTES = [
   "– descobrir o que ele queria me mostrar na espada",
   "– não responder o pai"]},
 
- {id:"primeiro-dia", title:"primeiro dia", date:"Meses atrás", body:[
-  "Já perdi uma família pro fogo e outra pro dinheiro. A terceira, eu escolho. E protejo.",
+  {id:"primeiro-dia", title:"primeiro dia", date:"Meses atrás", body:[
+     "Já perdi uma família pro fogo e outra pro dinheiro. A terceira, eu escolho. E protejo.",
   "— Igor Baroni"]},
 
  {id:"lembrete", title:"lembrete", date:"Anos atrás", body:[
