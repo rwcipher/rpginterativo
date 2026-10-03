@@ -25,8 +25,7 @@ const NOTIFICACOES = [
 const BADGES = {msgs:17, calls:4, gallery:0, notes:0, recs:0, web:0};
 
 // ---------- GALERIA ----------
-// img: caminho da foto na pasta img (ex.: "img/gabi.jpg"). Deixe sem img
-//      para mostrar só a descrição num fundo colorido (tone).
+// img: caminho da foto na pasta img (ex.: "img/gabi.jpg").
 // cap: legenda escrita pelo Igor. fav: true = coração de favorita.
 const FOTOS = [
  {id:"armadura-pai", img:"img/armadura-incompleta.jpg", title:"Recebida de Pai", date:"Há 2 semanas", cap:"", fav:false,
@@ -60,7 +59,7 @@ const THREADS = [
    {f:"o", t:"Nosso cliente paga o dobro do anúncio. Sem perguntas."},
    {stamp:"Anos atrás, 23:31"},
    {f:"o", t:"Seu avô também recusou. Não repita o erro dele."},
-   {f:"o", t:"Ligaremos às 23:50. — M."},
+   {f:"o", t:"Ligaremos às 23:50. — J."},
   ]},
  {id:"familia", name:"Família Baroni", color:"#4a3a2a", initial:"FB", time:"22:14", unread:true, muted:true, sub:"Pai, Mãe, Bianca",
   msgs:[
@@ -87,20 +86,20 @@ const THREADS = [
    {f:"me", t:"Os bombeiros disseram que eu não devia ter entrado. Mas eu ouvi o senhor chamando.", nd:true},
    {f:"me", t:"Minha pele vai ficar marcada pra sempre. Que bom. Não quero esquecer.", nd:true},
    {f:"me", t:"Eles nem esperaram o enterro pra falar de venda.", nd:true},
-   {stamp:"Há 2 Anos atrás"},
+   {stamp:"Há 2 anos"},
    {f:"me", t:"Eles querem vender tudo. Desculpa, vô. Só consegui salvar isso.", nd:true},
-   {stamp:"Anos Atrás"},
+   {stamp:"Anos atrás"},
    {f:"me", t:"Hoje eu protegi alguém. Acho que o senhor ia gostar dela.", nd:true},
    {f:"me", t:"Tô com medo. Mas a espada ainda pesa igual.", nd:true},
   ]},
 ];
 
 // ---------- NOTAS ----------
-// Cada item de body é um parágrafo.
+// Cada item de body é um parágrafo. O id de cada nota precisa ser diferente.
 const NOTES = [
-   {id:"carta", title:"Se alguém estiver lendo isso", date:"Editada há meses, 03:22", body:[
+ {id:"carta", title:"Se alguém estiver lendo isso", date:"Editada há meses, 03:22", body:[
   "Se você está com meu celular, provavelmente eu não voltei.",
-  "Nessa missão floresta sombria.",
+  "Nessa missão, na floresta sombria.",
   "Espero que seja você, Gabi.",
   "A espada se chama Escalibur. Meu avô deu esse nome rindo, dizendo que toda família precisa de um pouco de lenda. O braço da armadura era dele também.",
   "A cicatriz é do dia em que a casa do vô pegou fogo. Eu entrei. Cheguei até a porta do quarto dele. Não deu. Quando me tiraram de lá, a única coisa que eu segurava era o braço da armadura, que tava pendurado no corredor.",
@@ -110,41 +109,45 @@ const NOTES = [
   "Se eu morri protegendo as pessoas que considero minha família na Ordo Realitas, então acho que dessa vez eu consegui.",
   "Agora é seu.",
   "— Igor Baroni",
-  "PS.: Depois vou excluir isso KKKKK. Acho q vai ser momentaneo de deprê, deve ser esse lugar"]},
- {id:"registro", title:"registro", date:"meses, 02:40", body:[
+  "PS.: Depois vou excluir isso KKKKK. Acho que é só uma deprê momentânea, deve ser esse lugar."]},
+
+ {id:"registro", title:"registro", date:"Meses atrás, 02:40", body:[
   "Acho que essa missão vai ser longa, mas quero deixar registrado.",
   "Tomara que todos sobrevivam. Principalmente a Gabrielle. Não vou suportar sem conhecer ela mais, já que ela é a nossa capitã. (obs.: não posso dizer isso)",
   "E a Ordem... e o que está por vir."]},
+
+ {id:"floresta", title:"Floresta misteriosa", date:"Meses atrás, 03:10", body:[
+  "Acho que essa missão vai ser longa, mas quero deixar registrado.",
+  "E a Ordem... o que está por vir.",
+  "— Igor Baroni"]},
+
  {id:"lista", title:"coisas", date:"Anos atrás", body:[
   "– café do vô (o da lata azul)",
   "– levar a espada pra afiar? NÃO. ninguém encosta nela",
   "– descobrir o que ele queria me mostrar na espada",
   "– não responder o pai"]},
+
+ {id:"primeiro-dia", title:"primeiro dia", date:"Meses atrás", body:[
+  "Já perdi uma família pro fogo e outra pro dinheiro. A terceira, eu escolho. E protejo.",
+  "— Igor Baroni"]},
+
  {id:"lembrete", title:"lembrete", date:"Anos atrás", body:[
   "Encontrei um lugar no Brasil. Meio misterioso ainda, mas vou me acostumar.",
   "Uma moça, Gabriella ou Gabrielle, tenho que perguntar ainda.",
-  "Ela é forte, inteligente. Gostei dela. Muito diferente da minha irmã e da minha familia."]},
-{id:"carta", title:"Floresta misteriosa", date:"Editada meses, 03:22", body:[
-  "acho que essa missão vai ser longa mas quero deixar registrado,  e a Ordem o que à por vir.",
-  "acho que essa missão vai ser longa mas quero deixar registrado,  e a Ordem o que à por vir.",
-  "e a Ordem o que à por vir",
-  "— Igor Baroni"]},
-    {id:"primeiro-dia", title:"primeiro dia", date:"Meses atrás", body:[
-  "Já perdi uma família pro fogo e outra pro dinheiro. A terceira, eu escolho. E protejo.", body:[
-  "— Igor Baroni"]},
+  "Ela é forte, inteligente. Gostei dela. Muito diferente da minha irmã e da minha família."]},
 ];
 
 // ---------- GRAVADOR ----------
 // lines: [segundo, "texto"]. Texto entre [colchetes] vira efeito sonoro.
 const RECS = [
- {id:"vo", name:"vô", date:"2 Anos atrás", dur:38, lines:[
+ {id:"vo", name:"vô", date:"2 anos atrás", dur:38, lines:[
   [0,"Igor, passa aqui amanhã?"],
   [5,"Tirei a armadura do porão pra limpar…"],
   [11,"queria te mostrar uma coisa na espada que eu nunca te contei."],
   [20,"Traz aquele café que eu gosto."],
-  [26,"Te espero, a gente leva pra sua casa Igor."],
+  [26,"Te espero. A gente leva pra sua casa, Igor."],
   [31,"[ruído, uma porta se fechando ao fundo]"]]},
- {id:"igor", name:"sem título", date:"Anos, 23:44", dur:11, lines:[
+ {id:"igor", name:"sem título", date:"Anos atrás, 23:44", dur:11, lines:[
   [0,"[vento]"],
   [2,"…tá vendo? Eles tão lá dentro."],
   [6,"Se eu não…"],
@@ -156,14 +159,12 @@ const RECS = [
 const CALLS = [
  {n:"Pai (20)", t:"22:10", k:"Perdida", miss:true},
  {n:"Gabi", t:"19:34", k:"Efetuada"},
- {n:"Mãe", t:"Anos", k:"Perdida", miss:true},
- {n:"Vô", t:"2 Anos atrás", k:"Efetuada · número inexistente"},
+ {n:"Mãe", t:"Anos atrás", k:"Perdida", miss:true},
+ {n:"Vô", t:"2 anos atrás", k:"Efetuada · número inexistente"},
 ];
 
 // ---------- NAVEGADOR (páginas salvas) ----------
 // Cada item é uma página. Só "titulo" e "url" são obrigatórios; o resto é opcional.
-// tema: "claro" ou "escuro". img: foto no topo (ex.: "img/casa.jpg").
-// texto: parágrafos. campos: ["Rótulo","Valor"]. destaque: número grande (preço etc.).
 const SITES = [
  {titulo:"Valenti Aste — Lotto 117", url:"valentiaste.it/pt/lotto/117", hora:"Hoje, 21:10", tema:"claro",
   marca:"Casa d’Aste Valenti", subtitulo:"Firenze · São Paulo — Asta di famiglia · Lotto 117",
