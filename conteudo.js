@@ -17,7 +17,7 @@ const WALL = "img/fundo.jpg";                         // papel de parede (pasta 
 
 // Notificações na tela de bloqueio. icone: "msg" ou "tel"
 const NOTIFICACOES = [
- {icone:"msg", titulo:"+55 11 9••••-0117", texto:"Ligaremos às 23:50. — M.", hora:"23:31"},
+ {icone:"msg", titulo:"+55 11 9••••-0117", texto:"Ligaremos às 23:50. — J.", hora:"23:31"},
  {icone:"msg", titulo:"Família Baroni",    texto:"14 novas mensagens",      hora:"22:14"},
 ];
 
@@ -55,10 +55,10 @@ const FOTOS = [
 const THREADS = [
  {id:"desc", name:"+55 11 9••••-0117", color:"#5a2320", initial:"?", time:"23:31", unread:true, sub:"Número desconhecido",
   msgs:[
-   {stamp:"Hoje, 21:02"},
+   {stamp:"Anos atrás, 21:02"},
    {f:"o", t:"Igor Baroni. Sabemos que o braço esquerdo e a espada estão com você."},
    {f:"o", t:"Nosso cliente paga o dobro do anúncio. Sem perguntas."},
-   {stamp:"Hoje, 23:31"},
+   {stamp:"Anos atrás, 23:31"},
    {f:"o", t:"Seu avô também recusou. Não repita o erro dele."},
    {f:"o", t:"Ligaremos às 23:50. — M."},
   ]},
@@ -98,18 +98,20 @@ const THREADS = [
 // ---------- NOTAS ----------
 // Cada item de body é um parágrafo.
 const NOTES = [
-  {id:"carta", title:"Se alguém estiver lendo isso", date:"Editada meses, 03:22", body:[
+   {id:"carta", title:"Se alguém estiver lendo isso", date:"Editada há meses, 03:22", body:[
   "Se você está com meu celular, provavelmente eu não voltei.",
+  "Nessa missão floresta sombria.",
   "Espero que seja você, Gabi.",
   "A espada se chama Escalibur. Meu avô deu esse nome rindo, dizendo que toda família precisa de um pouco de lenda. O braço da armadura era dele também.",
   "A cicatriz é do dia em que a casa do vô pegou fogo. Eu entrei. Cheguei até a porta do quarto dele. Não deu. Quando me tiraram de lá, a única coisa que eu segurava era o braço da armadura, que tava pendurado no corredor.",
   "Então ela não esconde só a queimadura. Esconde que eu falhei com ele. E ela fica do lado do coração. Todo dia que eu usava, era uma promessa: da próxima vez, eu não vou soltar ninguém.",
   "Minha família vai querer isso de volta. Não por amor, por dinheiro. Não entrega. Nem se oferecerem tudo. Principalmente se oferecerem tudo.",
   "O nome Baroni não é a fortuna. Nunca foi. É isso aqui.",
-  "Se eu morri te protegendo, então acho que dessa vez eu consegui.",
+  "Se eu morri protegendo as pessoas que considero minha família na Ordo Realitas, então acho que dessa vez eu consegui.",
   "Agora é seu.",
-  "— Igor Baroni"]},
- {id:"registro", title:"registro", date:"Ontem, 02:40", body:[
+  "— Igor Baroni",
+  "PS.: Depois vou excluir isso KKKKK. Acho q vai ser momentaneo de deprê, deve ser esse lugar"]},
+ {id:"registro", title:"registro", date:"meses, 02:40", body:[
   "Acho que essa missão vai ser longa, mas quero deixar registrado.",
   "Tomara que todos sobrevivam. Principalmente a Gabrielle. Não vou suportar sem conhecer ela mais, já que ela é a nossa capitã. (obs.: não posso dizer isso)",
   "E a Ordem... e o que está por vir."]},
@@ -126,6 +128,9 @@ const NOTES = [
   "acho que essa missão vai ser longa mas quero deixar registrado,  e a Ordem o que à por vir.",
   "acho que essa missão vai ser longa mas quero deixar registrado,  e a Ordem o que à por vir.",
   "e a Ordem o que à por vir",
+  "— Igor Baroni"]},
+    {id:"primeiro-dia", title:"primeiro dia", date:"Meses atrás", body:[
+  "Já perdi uma família pro fogo e outra pro dinheiro. A terceira, eu escolho. E protejo.
   "— Igor Baroni"]},
 ];
 
