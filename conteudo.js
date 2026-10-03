@@ -132,7 +132,7 @@ const NOTES = [
  {id:"lembrete", title:"lembrete", date:"Anos atrás", body:[
   "Encontrei um lugar no Brasil. Meio misterioso ainda, mas vou me acostumar.",
   "Uma moça, Gabriella ou Gabrielle, tenho que perguntar ainda.",
-  "Ela é forte, inteligente. Gostei dela. Muito diferente da minha irmã e da minha família."]},
+  "Ela é forte, inteligente. Gostei dela. Muito diferente da minha irmã ela é mais do que irmã e da minha família."]},
 ];
 
 // ---------- GRAVADOR ----------
