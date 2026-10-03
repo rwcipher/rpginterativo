@@ -130,7 +130,7 @@ const NOTES = [
   "e a Ordem o que à por vir",
   "— Igor Baroni"]},
     {id:"primeiro-dia", title:"primeiro dia", date:"Meses atrás", body:[
-  "Já perdi uma família pro fogo e outra pro dinheiro. A terceira, eu escolho. E protejo.",
+  "Já perdi uma família pro fogo e outra pro dinheiro. A terceira, eu escolho. E protejo.", body:[
   "— Igor Baroni"]},
 ];
 
