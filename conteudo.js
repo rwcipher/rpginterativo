@@ -46,10 +46,6 @@ const FOTOS = [
 
  {id:"vo-igor", img:"img/vo-e-igor.jpg", title:"Eu e o vô", date:"Ano passado", cap:"", fav:true,
   desc:"Igor abraçado ao avô, os dois rindo na sala da casa antiga."},
-
- {id:"janela", img:"img/janela.jpg", title:"Última foto", date:"Hoje, 23:41", cap:"", fav:false,
-  desc:"Tirada de fora da janela da taverna. Lá dentro, agentes de preto conversam perto do balcão. O próprio Igor aparece desfocado no canto, espiando.",
-  prompt:"(já é a imagem real montada a partir do mapa)"},
 ];
 
 // ---------- MENSAGENS ----------
@@ -84,31 +80,16 @@ const THREADS = [
    {f:"Mãe", t:"A partir de hoje eu não te considero mais meu filho. Igual ao seu irmão. Dois ingratos."},
    {f:"Bianca", t:"tchau, herdeiro do vovô 👋"},
   ]},
- {id:"gabi", name:"Gabi", color:"#2f3c52", initial:"G", time:"19:36", sub:"",
+ {id:"vo", name:"Vô", color:"#6b5233", initial:"V", time:"Anos atrás", sub:"",
   msgs:[
-   {stamp:"Ontem, 02:10"},
-   {f:"o", t:"chegou vivo?"},
-   {f:"me", t:"infelizmente"},
-   {f:"o", t:"palhaço 🙄"},
-   {f:"o", t:"obrigada por hoje. de verdade."},
-   {f:"me", t:"não precisa agradecer. é pra isso que o braço serve"},
-   {f:"o", t:"que braço?"},
-   {f:"me", t:"um dia eu te conto"},
-   {stamp:"Hoje, 19:36"},
-   {f:"o", t:"missão hoje. vc vem né?"},
-   {f:"me", t:"sempre"},
-  ],
-  draft:"Gabi, obrigado por nunca perguntar da cicatriz. Amanhã eu te conto tudo, prometo. Sobre o vô, o fogo, a esp"},
- {id:"vo", name:"Vô", color:"#6b5233", initial:"V", time:"Ontem", sub:"",
-  msgs:[
-   {stamp:"Semanas atrás"},
+   {stamp:"Anos atrás"},
    {f:"me", t:"Eu voltei pra dentro, vô. Juro que voltei.", nd:true},
    {f:"me", t:"Os bombeiros disseram que eu não devia ter entrado. Mas eu ouvi o senhor chamando.", nd:true},
    {f:"me", t:"Minha pele vai ficar marcada pra sempre. Que bom. Não quero esquecer.", nd:true},
    {f:"me", t:"Eles nem esperaram o enterro pra falar de venda.", nd:true},
-   {stamp:"Há 2 semanas"},
+   {stamp:"Há 2 Anos atrás"},
    {f:"me", t:"Eles querem vender tudo. Desculpa, vô. Só consegui salvar isso.", nd:true},
-   {stamp:"Ontem"},
+   {stamp:"Anos Atrás"},
    {f:"me", t:"Hoje eu protegi alguém. Acho que o senhor ia gostar dela.", nd:true},
    {f:"me", t:"Tô com medo. Mas a espada ainda pesa igual.", nd:true},
   ]},
@@ -117,7 +98,7 @@ const THREADS = [
 // ---------- NOTAS ----------
 // Cada item de body é um parágrafo.
 const NOTES = [
- {id:"carta", title:"Se alguém estiver lendo isso", date:"Editada ontem, 03:22", body:[
+  {id:"carta", title:"Se alguém estiver lendo isso", date:"Editada meses, 03:22", body:[
   "Se você está com meu celular, provavelmente eu não voltei.",
   "Espero que seja você, Gabi.",
   "A espada se chama Escalibur. Meu avô deu esse nome rindo, dizendo que toda família precisa de um pouco de lenda. O braço da armadura era dele também.",
@@ -127,34 +108,38 @@ const NOTES = [
   "O nome Baroni não é a fortuna. Nunca foi. É isso aqui.",
   "Se eu morri te protegendo, então acho que dessa vez eu consegui.",
   "Agora é seu.",
-  "— Igor"]},
+  "— Igor Baroni"]},
  {id:"registro", title:"registro", date:"Ontem, 02:40", body:[
   "Acho que essa missão vai ser longa, mas quero deixar registrado.",
   "Tomara que todos sobrevivam. Principalmente a Gabrielle. Não vou suportar sem conhecer ela mais, já que ela é a nossa capitã. (obs.: não posso dizer isso)",
   "E a Ordem... e o que está por vir."]},
- {id:"lista", title:"coisas", date:"Semanas atrás", body:[
+ {id:"lista", title:"coisas", date:"Anos atrás", body:[
   "– café do vô (o da lata azul)",
   "– levar a espada pra afiar? NÃO. ninguém encosta nela",
   "– descobrir o que ele queria me mostrar na espada",
-  "– não responder o pai",
-  "– comprar faixa nova pro braço"]},
- {id:"lembrete", title:"lembrete", date:"Meses atrás", body:[
+  "– não responder o pai"]},
+ {id:"lembrete", title:"lembrete", date:"Anos atrás", body:[
   "Encontrei um lugar no Brasil. Meio misterioso ainda, mas vou me acostumar.",
   "Uma moça, Gabriella ou Gabrielle, tenho que perguntar ainda.",
-  "Ela é forte, inteligente. Gostei dela. Muito diferente da minha irmã."]},
+  "Ela é forte, inteligente. Gostei dela. Muito diferente da minha irmã e da minha familia."]},
+{id:"carta", title:"Floresta misteriosa", date:"Editada meses, 03:22", body:[
+  "acho que essa missão vai ser longa mas quero deixar registrado,  e a Ordem o que à por vir.",
+  "acho que essa missão vai ser longa mas quero deixar registrado,  e a Ordem o que à por vir.",
+  "e a Ordem o que à por vir",
+  "— Igor Baroni"]},
 ];
 
 // ---------- GRAVADOR ----------
 // lines: [segundo, "texto"]. Texto entre [colchetes] vira efeito sonoro.
 const RECS = [
- {id:"vo", name:"vô_sábado", date:"Semanas atrás", dur:38, lines:[
+ {id:"vo", name:"vô", date:"2 Anos atrás", dur:38, lines:[
   [0,"Igor, passa aqui amanhã?"],
   [5,"Tirei a armadura do porão pra limpar…"],
   [11,"queria te mostrar uma coisa na espada que eu nunca te contei."],
   [20,"Traz aquele café que eu gosto."],
-  [26,"Te espero."],
+  [26,"Te espero, a gente leva pra sua casa Igor."],
   [31,"[ruído, uma porta se fechando ao fundo]"]]},
- {id:"igor", name:"sem título", date:"Hoje, 23:44", dur:11, lines:[
+ {id:"igor", name:"sem título", date:"Anos, 23:44", dur:11, lines:[
   [0,"[vento]"],
   [2,"…tá vendo? Eles tão lá dentro."],
   [6,"Se eu não…"],
@@ -164,10 +149,10 @@ const RECS = [
 // ---------- TELEFONE (chamadas recentes) ----------
 // miss:true = chamada perdida (fica vermelha)
 const CALLS = [
- {n:"Pai (3)", t:"22:10", k:"Perdida", miss:true},
+ {n:"Pai (20)", t:"22:10", k:"Perdida", miss:true},
  {n:"Gabi", t:"19:34", k:"Efetuada"},
- {n:"Mãe", t:"Ontem", k:"Perdida", miss:true},
- {n:"Vô", t:"Semanas atrás", k:"Efetuada · número inexistente"},
+ {n:"Mãe", t:"Anos", k:"Perdida", miss:true},
+ {n:"Vô", t:"2 Anos atrás", k:"Efetuada · número inexistente"},
 ];
 
 // ---------- NAVEGADOR (páginas salvas) ----------
