@@ -31,7 +31,7 @@ const FOTOS = [
  {id:"floresta-video", video:"img/floresta.mp4", img:"img/floresta-capa.jpg", title:"Entrando na floresta", date:"Meses atrás, 02:55", dur:"0:07", cap:"lá vamos nós", fav:false,
   desc:"Vídeo gravado pelo Igor seguindo o grupo para dentro da floresta, entre árvores enormes e névoa."},
 
- {id:"armadura-pai", img:"img/armadura-incompleta.jpg", title:"Recebida de Pai", date:"Há 2 semanas", cap:"", fav:false,
+ {id:"armadura-pai", img:"img/armadura-incompleta.jpg", title:"Recebida de Pai", date:"Há 2 Anos atrás", cap:"", fav:false,
   desc:"Foto enviada pelo pai no grupo da família: a armadura no salão da mansão, sem o braço esquerdo e sem a espada."},
 
  {id:"familia", img:"img/familia-baroni.jpg", title:"Família Baroni", date:"Anos atrás", cap:"Foto tirada da Família Baroni", fav:false,
@@ -66,7 +66,7 @@ const THREADS = [
   ]},
  {id:"familia", name:"Família Baroni", color:"#4a3a2a", initial:"FB", time:"22:14", unread:true, muted:true, sub:"Pai, Mãe, Bianca",
   msgs:[
-   {stamp:"Há 2 semanas, 07:12"},
+   {stamp:"Há 2 Anos atrás, 07:12"},
    {f:"Pai", img:"img/armadura-incompleta.jpg", t:"Olha o que você fez. Faltando o braço e a espada."},
    {f:"Pai", t:"Devolve o que você roubou. Se não devolver, pode ficar escondido onde estiver, seu ingrato."},
    {f:"Mãe", t:"Filho, isso é roubo. Aquilo é patrimônio da família."},
@@ -164,7 +164,7 @@ const CALLS = [
 // ---------- NAVEGADOR (páginas salvas) ----------
 // Cada item é uma página. Só "titulo" e "url" são obrigatórios; o resto é opcional.
 const SITES = [
- {titulo:"Valenti Aste — Lotto 117", url:"valentiaste.it/pt/lotto/117", hora:"Hoje, 21:10", tema:"claro",
+ {titulo:"Valenti Aste — Lotto 117", url:"valentiaste.it/pt/lotto/117", hora:"Meses atrás, 21:10", tema:"claro",
   marca:"Casa d’Aste Valenti", subtitulo:"Firenze · São Paulo — Asta di famiglia · Lotto 117",
   manchete:"Armatura italiana completa con spada cerimoniale",
   img:"img/armadura-completa.jpg",
@@ -173,7 +173,7 @@ const SITES = [
   destaqueRotulo:"Aggiudicato (arrematado)", destaque:"R$ 410.000",
   aviso:"Nota del banditore: lote vendido incompleto. O arrematante aguarda a entrega das peças faltantes. Tratar diretamente com o Sr. Valenti."},
 
- {titulo:"Mansão dos Baroni pega fogo", url:"gazetaregional.com.br/cidade/mansao-baroni", hora:"Semanas atrás", tema:"escuro",
+ {titulo:"Mansão dos Baroni pega fogo", url:"gazetaregional.com.br/cidade/mansao-baroni", hora:"Há Anos atrás", tema:"escuro",
   marca:"Gazeta Regional", subtitulo:"Cidade · atualizado às 07:40",
   manchete:"Mansão da família Baroni pega fogo misteriosamente durante a madrugada",
   img:"img/mansao-incendio.jpg",
