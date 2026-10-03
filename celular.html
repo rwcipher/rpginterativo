@@ -109,6 +109,10 @@ button:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-ra
 .stamp{text-align:center;font-size:11px;color:var(--ash);margin:10px 0 4px}
 .msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:15px;line-height:1.35;background:var(--panel-2);align-self:flex-start;overflow-wrap:anywhere}
 .msg .who{display:block;font-size:11px;font-weight:700;color:var(--brass);margin-bottom:2px}
+.msg-img{display:block;width:100%;max-width:230px;border-radius:12px;margin:2px 0 6px}
+.msg.has-img{padding:5px 5px 8px}
+.cap-txt{display:block;padding:0 7px}
+.msg.has-img .who{margin:3px 7px 4px}
 .msg.me{align-self:flex-end;background:var(--bubble-me)}
 .msg-meta{align-self:flex-end;font-size:11px;color:#ff6b5e;margin:-2px 4px 4px}
 .draft{border-top:1px solid var(--line);padding:10px 12px 26px;background:#0c0a09}
@@ -298,13 +302,13 @@ const R = {
    <div class="body"><div class="info">${p.cap?`<div class="cap">“${esc(p.cap)}”</div>`:''}<div class="meta">${esc(p.title)}${isVid(p)?' · Vídeo':''}${p.fav?' · ♥ Favorita':''}</div>${showDesc?esc(p.desc||''):''}</div>${gmPhoto(p)}</div></div>`;
  },
  msgs(){
-  return `<div class="view appv fade">${bar('Mensagens','','home')}<div class="body list">${THREADS.map((t,i)=>{const last=[...t.msgs].reverse().find(m=>m.t);return `<button data-a="thread" data-i="${i}">${t.unread?'<span class="dot-unread"></span>':'<span style="width:10px"></span>'}<span class="avatar" style="background:${t.color}">${esc(t.initial)}</span><span class="row-main"><b>${esc(t.name)}${t.muted?' 🔕':''}<small>${t.time}</small></b><span>${t.draft?'<em style="color:#ff6b5e;font-style:normal">Rascunho:</em> '+esc(t.draft):esc(last.t)}</span></span></button>`;}).join('')}</div></div>`;
+  return `<div class="view appv fade">${bar('Mensagens','','home')}<div class="body list">${THREADS.map((t,i)=>{const last=[...t.msgs].reverse().find(m=>m.t||m.img)||{};return `<button data-a="thread" data-i="${i}">${t.unread?'<span class="dot-unread"></span>':'<span style="width:10px"></span>'}<span class="avatar" style="background:${t.color}">${esc(t.initial)}</span><span class="row-main"><b>${esc(t.name)}${t.muted?' 🔕':''}<small>${t.time}</small></b><span>${t.draft?'<em style="color:#ff6b5e;font-style:normal">Rascunho:</em> '+esc(t.draft):esc(last.t || (last.img?'📷 Foto':''))}</span></span></button>`;}).join('')}</div></div>`;
  },
  thread(){
   const t=THREADS[state.i]; const group=t.id==='familia';
   const body=t.msgs.map(m=>{ if(m.stamp) return `<div class="stamp">${esc(m.stamp)}</div>`;
     const me=m.f==='me'; const who=group&&!me?`<span class="who">${esc(m.f)}</span>`:'';
-    return `<div class="msg ${me?'me':''}">${who}${esc(m.t)}</div>${m.nd?'<div class="msg-meta">Não entregue</div>':''}`;}).join('');
+    return `<div class="msg ${me?'me':''} ${m.img?'has-img':''}">${who}${m.img?`<img class="msg-img" src="${esc(m.img)}" alt="Foto" loading="lazy">`:''}${m.t?(m.img?`<span class="cap-txt">${esc(m.t)}</span>`:esc(m.t)):''}</div>${m.nd?'<div class="msg-meta">Não entregue</div>':''}`;}).join('');
   return `<div class="view appv fade">${bar(t.name,t.sub,'msgs')}<div class="body"><div class="chat">${body}</div></div>${t.draft?`<div class="draft"><label>Mensagem não enviada</label><div>${esc(t.draft)}</div></div>`:''}</div>`;
  },
  notes(){
