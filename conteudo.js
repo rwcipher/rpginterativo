@@ -37,7 +37,7 @@ const FOTOS = [
  {id:"familia", img:"img/familia-baroni.jpg", title:"Família Baroni", date:"Anos atrás", cap:"Foto tirada da Família Baroni", fav:false,
   desc:"Retrato formal no escritório da mansão: o pai sentado, a mãe ao lado, Bianca atrás, o irmão mais velho à esquerda e Igor à direita, de terno, sem sorrir."},
 
- {id:"bebendo", img:"img/gabrielle-bebendo.jpg", title:"Selfie na janela", date:"Meses atrás, 23:41", cap:"eles nem me viram", fav:false,
+ {id:"bebendo", img:"img/gabrielle-bebendo.jpg", title:"Selfie na janela", date:"Meses atrás, 23:41", cap:"eles nem me viram", fav:true,
   desc:"Igor tirando uma selfie do lado de fora da janela da taverna. Lá dentro, o grupo ri e bebe no balcão."},
 
  {id:"bebada", img:"img/gabrielle-bebada.jpg", title:"Discussão na taverna", date:"Meses atrás, 22:58", cap:"", fav:false,
